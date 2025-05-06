@@ -1,0 +1,24 @@
+
+replicaCount: 3
+
+app:
+  labels:
+    app: myapp
+  name: springapp
+  image:
+    repository: maheshgowdamg25/springapp
+    tag: "0c4ccd6acc37ebf8488cf87abfbfbca33c5f00bf"
+    pullPolicy: Always
+  port: 9000
+
+  
+  
+  service:
+    type: NodePort
+    nodePort: 30090
+
+
+
+
+
+  
