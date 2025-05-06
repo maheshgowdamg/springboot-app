@@ -7,7 +7,7 @@ app:
   name: springapp
   image:
     repository: maheshgowdamg25/springapp
-    tag: "0c4ccd6acc37ebf8488cf87abfbfbca33c5f00bf"
+    tag: "latest"
     pullPolicy: Always
   port: 9000
 
