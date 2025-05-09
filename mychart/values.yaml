@@ -15,7 +15,7 @@ app:
   
   service:
     type: NodePort
-    nodePort: 30092
+    nodePort: 30090
 
 
 
