@@ -1,6 +1,6 @@
 ---
-apiVersion: apps/v1 
-kind: Deployment 
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: {{ .Release.Name }}-deploy
   namespace: demo
@@ -9,22 +9,42 @@ spec:
   selector:
     matchLabels:
       app: {{ .Values.app.labels.app }}
-   
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
   template:
     metadata:
       labels:
         app: {{ .Values.app.labels.app }}
     spec:
       containers:
-       - name: {{ .Values.app.name }}
-         image: "{{ .Values.app.image.repository }}:{{ .Values.app.image.tag }}"
-         ports:
-           - containerPort: {{ .Values.app.port }}
-         imagePullPolicy: {{ .Values.app.image.pullPolicy }}
-         
-        
+        - name: {{ .Values.app.name }}
+          image: "{{ .Values.app.image.repository }}:{{ .Values.app.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.app.port }}
+          imagePullPolicy: {{ .Values.app.image.pullPolicy }}
+          startupProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            failureThreshold: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20
 ---
-apiVersion: v1 
+apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Release.Name }}-mysvc
@@ -33,7 +53,7 @@ spec:
   selector:
     app: {{ .Values.app.labels.app }}
   ports:
-  - port: {{ .Values.app.port }}
-    targetPort: {{ .Values.app.port }}
-    nodePort: {{ .Values.app.service.nodePort }}
+    - port: {{ .Values.app.port }}
+      targetPort: {{ .Values.app.port }}
+      nodePort: {{ .Values.app.service.nodePort }}
   type: {{ .Values.app.service.type }}
