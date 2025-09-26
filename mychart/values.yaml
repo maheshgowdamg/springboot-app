@@ -6,10 +6,10 @@ app:
   name: springapp
   image:
     repository: maheshgowdamg25/springboot
-    tag: "latest"
+    tag: "latest"       # must be non-empty
     pullPolicy: Always
   port: 8080
 
   service:
     type: NodePort
-    nodePort: 30090
+    nodePort: 30090      # must be in 30000-32767 if NodePort
