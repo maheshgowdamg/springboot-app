@@ -1,4 +1,3 @@
-
 replicaCount: 1
 
 app:
@@ -11,14 +10,6 @@ app:
     pullPolicy: Always
   port: 8080
 
-  
-  
   service:
     type: NodePort
     nodePort: 30090
-
-
-
-
-
-  
