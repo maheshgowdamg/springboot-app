@@ -7,7 +7,7 @@ app:
   name: springapp
   image:
     repository: maheshgowdamg25/springboot
-    tag:"latest"
+    tag: "latest"
     pullPolicy: Always
   port: 8080
 
