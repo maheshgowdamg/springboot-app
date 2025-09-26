@@ -12,4 +12,4 @@ app:
 
   service:
     type: NodePort
-    nodePort: 30090      # must be in 30000-32767 if NodePort
+       # must be in 30000-32767 if NodePort
