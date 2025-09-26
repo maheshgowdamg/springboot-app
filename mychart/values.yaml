@@ -6,10 +6,9 @@ app:
     app: myapp
   name: springapp
   image:
-    repository: maheshgowdamg25/springapp
-    tag: 1f09a8a5e2a39b060b3379276296d37dff6b3522
+    repository: maheshgowdamg25/springboot
     pullPolicy: Always
-  port: 9000
+  port: 8080
 
   
   
