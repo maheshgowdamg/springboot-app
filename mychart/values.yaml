@@ -1,3 +1,4 @@
+namespace: dev
 replicaCount: 1
 
 app:
